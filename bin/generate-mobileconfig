@@ -50,8 +50,7 @@ conn rw-ip-${IP}
     rightsourceip=${IP}
     auto=add
 EOF
-    /usr/sbin/ipsec reload >> /dev/null
- fi
+fi
 
 cat <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
