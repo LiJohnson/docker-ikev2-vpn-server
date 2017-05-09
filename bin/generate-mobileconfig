@@ -40,6 +40,19 @@
 : ${CONN_REMOTE_IDENTIFIER=${HOST}}
 CONN_SHARED_SECRET=$(cat /etc/ipsec.secrets | sed 's/.*"\(.*\)"/\1/g')
 
+
+if [[ $IP = 10.8.* ]]; then
+    cat >> /etc/ipsec.conf <<EOF
+conn rw-ip-${IP}
+    leftsubnet=0.0.0.0/0,::/0
+    leftfirewall=yes
+    rightid=${IP}
+    rightsourceip=${IP}
+    auto=add
+EOF
+    /usr/sbin/ipsec reload >> /dev/null
+ fi
+
 cat <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -89,7 +102,7 @@ cat <<EOF
                     <string>${CONN_REMOTE_IDENTIFIER}</string>
                     <!-- Local IKE identity, same restrictions as above. If it is empty the client's IP address will be used -->
                     <key>LocalIdentifier</key>
-                    <string></string>
+                    <string>${IP}</string>
                     <!--
                     OnDemand references:
                     http://www.v2ex.com/t/137653

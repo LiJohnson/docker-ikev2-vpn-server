@@ -10,7 +10,7 @@ Recipe to build [`gaomd/ikev2-vpn-server`](https://registry.hub.docker.com/u/gao
 
 ### 2. Generate the .mobileconfig (for iOS / macOS)
 
-    docker run --privileged -i -t --rm --volumes-from ikev2-vpn-server -e "HOST=vpn1.example.com" lijohnson/ubuntu:ikev2 generate-mobileconfig > ikev2-vpn.mobileconfig
+    docker run --privileged -i -t --rm --volumes-from ikev2-vpn-server -e "HOST=vpn1.example.com" [ -e "IP=10.8.0.3"] lijohnson/ubuntu:ikev2 generate-mobileconfig > ikev2-vpn.mobileconfig
 
 *Be sure to replace `vpn1.example.com` with your own domain name and resolve it to you server's IP address. Simply put an IP address is supported as well (and enjoy an even faster handshake speed).*
 
