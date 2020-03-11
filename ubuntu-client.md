@@ -2,7 +2,7 @@
 
 # install strongswan
 
-apt-get install -y strongswan libstrongswan-standard-plugins libcharon-extra-plugins
+apt-get install -y strongswan libstrongswan-standard-plugins libcharon-extra-plugins libcharon-standard-plugins
 
 # edit /etc/ipsec.conf
 
